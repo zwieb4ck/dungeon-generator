@@ -1,0 +1,66 @@
+@import '../../../mixins.scss';
+
+:host {
+    border-left: 3px solid var(--primary);
+    background-color: #0a0b0c;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex: 0 0 auto;
+    width: autO;
+    margin: 0 var(--p);
+}
+
+.title {
+    background-color: var(--background-20);
+    font-size: 20px;
+    font-weight: 500;
+    padding: var(--p) var(--p2);
+    margin-top: var(--p);
+    font-size: 12px;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.properties {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    background-color: var(--background-20);
+    box-sizing: border-box;
+
+    &-section {
+        padding: var(--p2) var(--p);
+        margin: 0 0 var(--p2) 0;
+        border-bottom: 1px solid var(--background-90);
+    }
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: var(--p);
+    padding: 0 var(--p2);
+    margin-bottom: var(--p);
+
+    &__label {
+        color: var(--foreground-50);
+        width: 150px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    &__input {
+        background-color: var(--black);
+        color: var(--foreground);
+        border: none;
+        outline: none;
+        flex: 1 1 auto;
+        font-size: 16px;
+        padding: var(--p);
+    }
+}

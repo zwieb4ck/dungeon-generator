@@ -1,0 +1,13 @@
+<header class="header">
+    <span class="title">Properties</span>
+</header>
+<div class="properties">
+    <fieldset class="properties-section" *ngIf="selectedNode">
+        <!--div class="form-group" *ngFor="let property of selectedNode.EditableProperties">
+            <label :for="`${selectedNode.id}-${property.key}`"
+                class="form-group__label">{{camelCaseToWordsCapitalized(property.key)}}</label>
+            <input type="text" :id="`${selectedNode.id}-${x.key}`" class="form-group__input" [ngModel]="property.value"
+                (blur)="selectedNode.updateProperty(property, $event)" />
+        </div-->
+    </fieldset>
+</div>

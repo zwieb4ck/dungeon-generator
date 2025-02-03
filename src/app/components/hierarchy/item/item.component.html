@@ -1,0 +1,3 @@
+<div class="item-wrapper" (click)="selectNode()">
+    <div class="item" [ngClass]="['item--' + getType(), node.selected ? 'item--selected' : '']">{{node.title}}</div>
+</div>

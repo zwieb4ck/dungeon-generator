@@ -1,0 +1,7 @@
+<header class="header">Hierarchy</header>
+<div *ngIf="objectService.nodes.length > 0" class="hierarchy">
+    <app-item *ngFor="let node of objectService.nodes" [node]="node" (selected)="selectNode(node)"></app-item>
+</div>
+<div *ngIf="objectService.nodes.length === 0" class="no-data">
+    <p>No objects available</p>
+</div>

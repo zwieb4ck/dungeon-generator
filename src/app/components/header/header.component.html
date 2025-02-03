@@ -1,0 +1,10 @@
+
+<app-icon-button (click)="saveProject()">draft</app-icon-button>
+<app-icon-button (click)="saveProject()">folder</app-icon-button>
+<app-icon-button (click)="saveProject()">save</app-icon-button>
+<input type="text" [(ngModel)]="project.name" class="project-name" />
+<span class="spacer"></span>
+<app-icon-button (click)="editorToCenter()">control_camera</app-icon-button>
+<app-icon-button *ngIf="project.drawMode === EDungeonDrawMode.Complex" (click)="toggleDungeonDrawMode()">adjust</app-icon-button>
+<app-icon-button *ngIf="project.drawMode === EDungeonDrawMode.Simple" (click)="toggleDungeonDrawMode()">nest_secure_alarm</app-icon-button>
+<app-icon-button (click)="generateNewSeed()">autorenew</app-icon-button>

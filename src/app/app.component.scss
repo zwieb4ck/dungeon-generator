@@ -1,0 +1,44 @@
+.c-app {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    grid-template-areas:
+        "header header header properties"
+        "hierarchy editor preview properties";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 250px 1fr 1fr 350px;
+
+    @media screen and (max-width: 1500px) {
+        grid-template-rows: 60px 1fr 1fr;
+        grid-template-areas:
+            "header header header properties"
+            "hierarchy editor editor properties"
+            "hierarchy preview preview properties";
+    }
+}
+
+.c-header {
+    grid-area: header;
+}
+
+.c-hierachy {
+    grid-area: hierarchy;
+}
+
+.c-editor {
+    grid-area: editor;
+    border-right: 1px solid var(--background-90);
+
+    @media screen and (max-width: 1500px) {
+        border-bottom: 1px solid var(--background-90);
+    }
+}
+
+.c-preview {
+    grid-area: preview;
+}
+
+.c-properties {
+    grid-area: properties;
+}

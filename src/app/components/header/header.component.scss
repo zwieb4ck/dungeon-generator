@@ -1,0 +1,24 @@
+:host {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 var(--p2);
+    background-color: var(--background-50);
+    border-bottom: 3px solid var(--primary);
+    box-sizing: border-box;
+    gap: var(--p);
+}
+
+.project-name {
+    background-color: transparent;
+    border: none;
+    font-size: 1.4em;
+    color: inherit;
+    flex: 1 1 auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

@@ -1,1 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap');
+
+:root {
+  /** color aspect */
+  --primary: #ffa801;
+  --primary-10: #ffb235;
+  --primary-20: #ffbb53;
+  --primary-30: #ffc56d;
+  --primary-40: #ffce85;
+  --primary-50: #ffd89e;
+
+  /** foreground */
+  --foreground: #eeeeee;
+  --foreground-10: #dcdcdc;
+  --foreground-20: #cbcbcb;
+  --foreground-30: #b9b9b9;
+  --foreground-40: #a8a8a8;
+  --foreground-50: #969696;
+  --foreground-60: #858585;
+  --foreground-70: #737373;
+  --foreground-80: #626262;
+  --foreground-90: #505050;
+
+  /** background */
+  --background: #1a1b1c;
+  --background-10: #1d1e1f;
+  --background-20: #202122;
+  --background-30: #232425;
+  --background-40: #262728;
+  --background-50: #292a2b;
+  --background-60: #2c2d2e;
+  --background-70: #2f3031;
+  --background-80: #323334;
+  --background-90: #353637;
+
+  --black: #0a0b0c;
+
+  --entry: #00d8d6;
+  --room: #ffd32a;
+  --hallway: #05c46b;
+  --elite: #ef5777;
+  --teleport: #ff3f34;
+  --boss: #3c40c6;
+
+  --p: 6px;
+  --p2: 12px;
+  --p4: 24px;
+
+  --border-radius: 3px;
+
+  --error: #ff3f34;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body, html {
+  font-family: "Smooch Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+input, textarea {
+  font-family: "Smooch Sans", serif;
+}
+
+*  {
+  user-select: none;
+}

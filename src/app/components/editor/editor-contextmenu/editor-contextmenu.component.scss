@@ -1,0 +1,51 @@
+@import '../../../../mixins.scss';
+
+:host {
+    height: auto;
+    width: 150px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--background-50);
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.context-menu-header {
+    @include headerStyleLight();
+}
+
+.context-menu {
+    &-item {
+        border-bottom: 1px solid var(--background-90);
+        padding: var(--p);
+        cursor: pointer;
+
+        &--entry {
+            border-left: 5px solid var(--entry);
+        }
+
+        &--room {
+            border-left: 5px solid var(--room);
+        }
+
+        &--hallway {
+            border-left: 5px solid var(--hallway);
+        }
+
+        &--elite {
+            border-left: 5px solid var(--elite);
+        }
+
+        &--teleport {
+            border-left: 5px solid var(--teleport);
+        }
+
+        &--boss {
+            border-left: 5px solid var(--boss);
+        }
+
+        &:hover {
+            background-color: var(--background-60);
+        }
+    }
+}

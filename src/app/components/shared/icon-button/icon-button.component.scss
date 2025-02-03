@@ -1,0 +1,22 @@
+.icon-button {
+    height: 32px;
+    width: 32px;
+    border-radius: var(--border-radius);
+    transition: ease-in all .15s;
+    color: var(--primary);
+    border: 1px solid transparent;
+    background: transparent;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 var(--p);
+    
+    &:hover {
+        border: 1px solid var(--primary);
+    }
+
+    &:active {
+        background-color: var(--primary);
+        color: var(--background);
+    }
+}

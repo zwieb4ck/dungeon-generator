@@ -1,0 +1,50 @@
+.item-wrapper {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border-bottom: 1px solid var(--background-90);
+    padding: var(--p);
+    box-sizing: border-box;
+
+    &:hover {
+        background-color: var(--background-60);
+    }
+}
+
+.item {
+    padding: var(--p);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--foreground-20);
+    box-sizing: border-box;
+
+    &--entry {
+        border-left: 5px solid var(--entry);
+    }
+
+    &--room {
+        border-left: 5px solid var(--room);
+    }
+
+    &--hallway {
+        border-left: 5px solid var(--hallway);
+    }
+
+    &--elite {
+        border-left: 5px solid var(--elite);
+    }
+
+    &--teleport {
+        border-left: 5px solid var(--teleport);
+    }
+
+    &--boss {
+        border-left: 5px solid var(--boss);
+    }
+
+    &--selected {
+        font-weight: 700;
+        color: var(--foreground);
+    }
+}

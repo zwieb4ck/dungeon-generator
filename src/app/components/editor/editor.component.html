@@ -1,0 +1,6 @@
+<canvas id="editor" class="editor"></canvas>
+<app-editor-contextmenu 
+*ngIf="contextMenuOpen" 
+[rightClickVector]="currentClickPoint"
+(createNode)="createNode($event.type)"
+></app-editor-contextmenu>
