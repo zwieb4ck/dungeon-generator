@@ -9,8 +9,8 @@ export default class HallwayNode extends Room {
     public override minRoomHeight: number = 1;
     public override maxRoomHeight: number = 5;
 
-    constructor(position: Vector2, id: string = MathUtils.generateUUID()) {
-        super(position, ENodeType.Hallway, id, true);
+    constructor(position: Vector2, id: string = MathUtils.generateUUID(), seed: string = "") {
+        super(position, ENodeType.Hallway, id, true, seed);
         this.title = "New Hallway Node";
     }
 

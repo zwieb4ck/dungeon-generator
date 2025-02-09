@@ -1,0 +1,88 @@
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--p);
+    padding: 0 var(--p2);
+    margin-bottom: var(--p);
+
+    &__hidden {
+        display: none;
+    }
+
+    &__label {
+        color: var(--foreground-50);
+        width: 150px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    &__input {
+        background-color: var(--black);
+        color: var(--foreground);
+        border: none;
+        outline: none;
+        flex: 1 1 auto;
+        font-size: 16px;
+        padding: var(--p);
+
+        &--checkbox {
+            flex: 0 0 auto;
+            width: auto;
+        }
+
+        &--small {
+            width: 30px;
+            flex: 1 1 auto;
+        }
+    }
+
+    &__table {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    &__col {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    &__text, &__action {
+        font-size: 0.8rem;
+        color: var(--foreground-30);
+        min-height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 auto;
+    }
+    &__action {
+        align-items: flex-end;
+    }
+
+    &__button {
+        border-radius: var(--border-radius);
+        transition: ease-in all .15s;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        background: transparent;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 var(--p);
+        padding: var(--p) var(--p2);
+        font-size: 0.5rem;
+        
+        &:hover {
+            border: 1px solid var(--primary);
+        }
+    
+        &:active {
+            background-color: var(--primary);
+            color: var(--background);
+        }
+    }
+}

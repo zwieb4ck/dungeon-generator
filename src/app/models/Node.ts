@@ -5,6 +5,7 @@ import { Pin, EPinType, TPin } from "./Pin";
 import { Selectable } from "./Selectable";
 import { generateSeed } from "../utils/generateSeed";
 import { PRNG } from "./prng";
+import { TProperty } from "./Room";
 
 //#region types and config for nodes
 export const NodeConfig = {
@@ -40,7 +41,7 @@ export type TNode = {
     title: string,
     pins: TPin[],
     seed: string,
-    properties: Record<string,any>
+    properties: TProperty[],
 }
 
 export type TNodeCollisionObject = {
@@ -59,7 +60,8 @@ export class Node extends Selectable {
     public title: string = "New Node";
     public override worldPosition: Vector2 = new Vector2(0, 0);
     public pins: Pin[] = [];
-    public seed: string;
+    public seed: string = "";
+    public isStart: boolean = false;
 
     public override get height(): number {
         const maxLenghtPerSide = Math.max(this.pins.filter(p => p.type === EPinType.In).length, this.pins.filter(p => p.type === EPinType.Out).length);
@@ -90,11 +92,11 @@ export class Node extends Selectable {
     //#region protected
     protected hasAddButton = true;
     protected random: PRNG;
-    protected properties: Record<string,any> = {};
+    protected properties: Record<string, any> = {};
     //#endregion
-    constructor(public position: Vector2, public type: ENodeType, public id: string = MathUtils.generateUUID(), public createInitialPins = true) {
+    constructor(public position: Vector2, public type: ENodeType, public id: string = MathUtils.generateUUID(), public createInitialPins = true, seed: string = "") {
         super();
-        this.seed = generateSeed();
+        this.seed = seed || generateSeed();
         this.random = new PRNG(this.seed);
         if (this.createInitialPins) {
             this.pins.push(new Pin(id, EPinType.In));
@@ -198,8 +200,35 @@ export class Node extends Selectable {
             context.fillText("+", this.addButtonPosition.text.x * zoomFactor, this.addButtonPosition.text.y * zoomFactor);
         }
 
+        if (this.isStart) {
+            this.drawStartSymbol(context, (this.worldPosition.x + this.width / 2) * zoomFactor, (this.worldPosition.y + this.height / 2 + 12) * zoomFactor, 20 * zoomFactor);
+        }
+
         this.worldPosition = position;
     }
+
+    private drawStartSymbol(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
+        // Berechne die Punkte des Dreiecks
+        const height = size * Math.sqrt(3) / 2; // Höhe eines gleichseitigen Dreiecks
+        const halfSize = size / 3;
+
+        const p1 = { x: x - halfSize, y: y - height / 2 }; // Linke Ecke
+        const p2 = { x: x + halfSize, y: y }; // Rechte Spitze
+        const p3 = { x: x - halfSize, y: y + height / 2 }; // Untere Ecke
+
+        ctx.fillStyle = "rgba(255,255,255,0.4)";
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.lineTo(p3.x, p3.y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x - size * 0.1, y, size / 1.2, 0, Math.PI * 2, false);
+        ctx.strokeStyle = "rgba(255,255,255,0.4)";
+        ctx.stroke();
+    }
+
     //#endregion
     //#region collision
     public isNodeAtPoint(point: Vector2) {
@@ -271,8 +300,12 @@ export class Node extends Selectable {
             title: this.title,
             pins: this.pins.map(p => p.toJson()),
             seed: this.seed,
-            properties: this.properties,
+            properties: this.getProperties(),
         }
+    }
+
+    protected getProperties(): TProperty[] {
+        return [];
     }
     //#endregion
 }

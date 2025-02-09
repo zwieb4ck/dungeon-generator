@@ -9,8 +9,8 @@ export default class EliteNode extends Room {
     public override minRoomHeight: number = 2;
     public override maxRoomHeight: number = 2;
 
-    constructor(position: Vector2, id: string = MathUtils.generateUUID()) {
-        super(position, ENodeType.Elite, id, true);
+    constructor(position: Vector2, id: string = MathUtils.generateUUID(), seed: string = "") {
+        super(position, ENodeType.Elite, id, true, seed);
         this.title = "New Elite Node";
     }
 

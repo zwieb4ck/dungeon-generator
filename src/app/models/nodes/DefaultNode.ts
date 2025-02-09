@@ -9,8 +9,8 @@ export default class DefaultNode extends Room {
     public override minRoomHeight: number = 1;
     public override maxRoomHeight: number = 2;
 
-    constructor(position: Vector2, id: string = MathUtils.generateUUID()) {
-        super(position, ENodeType.Room, id, true);
+    constructor(position: Vector2, id: string = MathUtils.generateUUID(), seed: string = "") {
+        super(position, ENodeType.Room, id, true, seed);
         this.title = "New Default Node";
     }
 

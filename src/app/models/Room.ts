@@ -18,19 +18,23 @@ export enum EPropertiesType {
     Button
 }
 
-export type TProperties = {
+export type TProperty = {
     type: EPropertiesType,
     label: string,
+    id: number,
 } & ({
     type: EPropertiesType.Range,
     min: number,
     max: number,
+    propName: Record<string, string>,
 } | {
     type: EPropertiesType.Button,
-    action: () => void
+    action: () => void,
+    buttonLabel: string,
 } | {
     type: EPropertiesType.Boolean | EPropertiesType.String | EPropertiesType.Number | EPropertiesType.Text,
     model: any,
+    propName: string,
 });
 
 export default class Room extends Node {
@@ -39,34 +43,36 @@ export default class Room extends Node {
     public maxRoomWidth: number = 3;
     public minRoomHeight: number = 1;
     public maxRoomHeight: number = 3;
-    public isStart: boolean = false;
-    public propertyCache: TProperties[] = [];
+    public propertyCache: TProperty[] = [];
 
-    public get Properties(): TProperties[] {
+    public get Properties(): TProperty[] {
         return this.propertyCache;
     }
 
     private roomWidth: number = 0;
     private roomHeight: number = 0;
 
-    constructor(position: Vector2, type: ENodeType, id: string = MathUtils.generateUUID(), createInitialPins: boolean) {
-        super(position, type, id, createInitialPins);
+    someNumber: number = 12;
 
+    constructor(position: Vector2, type: ENodeType, id: string = MathUtils.generateUUID(), createInitialPins: boolean, seed: string = "") {
+        super(position, type, id, createInitialPins, seed);
+        this.updateCache();
     }
 
     public updateCache() {
         this.propertyCache = [
-            { type: EPropertiesType.Text, model: this.seed, label: "Seed" },
-            { type: EPropertiesType.Button, action: this.applyNewSeed.bind(this), label: "Generate new seed" },
-            { type: EPropertiesType.String, model: this.title, label: "Title" },
-            { type: EPropertiesType.Range, min: this.minRoomHeight, max: this.maxRoomHeight, label: "Room Height" },
-            { type: EPropertiesType.Range, min: this.minRoomWidth, max: this.maxRoomWidth, label: "Room Width" },
-            { type: EPropertiesType.Boolean, model: this.isStart, label: "Is Start?" },
+            { id: 0, type: EPropertiesType.String, model: this.title, label: "Title", propName: "title" },
+            { id: 1, type: EPropertiesType.Boolean, model: this.isStart, label: "Is Start?", propName: "isStart" },
+            { id: 2, type: EPropertiesType.Range, min: this.minRoomHeight, max: this.maxRoomHeight, label: "Room Height", propName: { min: "minRoomHeight", max: "maxRoomHeight" } },
+            { id: 3, type: EPropertiesType.Range, min: this.minRoomWidth, max: this.maxRoomWidth, label: "Room Width", propName: { min: "minRoomWidth", max: "maxRoomWidth" } },
+            { id: 4, type: EPropertiesType.Text, model: this.seed, label: "Seed", propName: "seed" },
+            { id: 5, type: EPropertiesType.Button, action: this.applyNewSeed.bind(this), label: "Generate new seed", buttonLabel: "Generate" },
         ];
     }
 
     private applyNewSeed() {
         this.updateSeed(generateSeed());
+        this.updateCache();
     }
 
     // utility
@@ -75,9 +81,25 @@ export default class Room extends Node {
         return res;
     }
 
-    public assingProperties(properties: Record<string, any>) {
-        Object.entries(properties).forEach(([key, value]) => {
-            (this as any)[key] = value;
+    public assingProperties(properties: TProperty[]) {
+        properties.forEach(prop => {
+            this.updateProperty(prop);
         });
+        this.updateCache();
+    }
+
+    public updateProperty(property: TProperty) {
+        if (property.type === EPropertiesType.Range) {
+            Object.entries(property.propName).forEach(([key, propKey]) => {
+                (this as any)[propKey] = (property as any)[key];
+            })
+        } else if (property.type !== EPropertiesType.Button && property.type !== EPropertiesType.Text) {
+            (this as any)[property.propName] = property.model;
+        }
+        this.updateCache();
+    }
+
+    protected override getProperties() {
+        return this.propertyCache.filter(p => p.type !== EPropertiesType.Button);
     }
 }

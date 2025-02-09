@@ -1,1 +1,5 @@
-<p>string works!</p>
+<div *ngIf="propertyCache && propertyCache.type === EPropertiesType.String" class="form-group">
+    <label :for="`${id}`" class="form-group__label">{{propertyCache.label}}</label>
+    <input type="text" :id="`${id}`" class="form-group__input" [(ngModel)]="propertyCache.model"
+        (blur)="emitUpdate()" />
+</div>

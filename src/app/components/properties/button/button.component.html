@@ -1,1 +1,8 @@
-<p>button works!</p>
+<div class="form-group" *ngIf="property && property.type === EPropertiesType.Button">
+    <div class="form-group__label">
+{{property.label}}
+    </div>
+    <div class="form-group__action">
+        <button class="form-group__button" (click)="property.action.call(this)">{{property.buttonLabel}}</button>
+    </div>
+</div>

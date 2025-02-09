@@ -9,8 +9,8 @@ export default class TeleporterNode extends Room {
     public override minRoomHeight: number = 1;
     public override maxRoomHeight: number = 1;
 
-    constructor(position: Vector2, id: string = MathUtils.generateUUID()) {
-        super(position, ENodeType.Teleport, id, true);
+    constructor(position: Vector2, id: string = MathUtils.generateUUID(), seed: string = "") {
+        super(position, ENodeType.Teleport, id, true, seed);
         this.title = "New Teleporter Node";
     }
 

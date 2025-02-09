@@ -131,6 +131,11 @@ export class ObjectsService {
     this.delete([...this.nodes,...this.connections]);
   }
 
+  public updateStartNode(newStartRoom: Room) {
+    this.nodes.forEach((n)=> n.isStart = false);
+    newStartRoom.isStart = true;
+  }
+
   private updateConnections() {
     this.connections.forEach((c) => {
       const relatedIds = [c.from.relatedId];

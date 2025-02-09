@@ -39,28 +39,3 @@
         border-bottom: 1px solid var(--background-90);
     }
 }
-
-.form-group {
-    display: flex;
-    align-items: center;
-    gap: var(--p);
-    padding: 0 var(--p2);
-    margin-bottom: var(--p);
-
-    &__label {
-        color: var(--foreground-50);
-        width: 150px;
-        font-weight: 600;
-        font-size: 16px;
-    }
-
-    &__input {
-        background-color: var(--black);
-        color: var(--foreground);
-        border: none;
-        outline: none;
-        flex: 1 1 auto;
-        font-size: 16px;
-        padding: var(--p);
-    }
-}

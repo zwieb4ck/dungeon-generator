@@ -1,0 +1,8 @@
+.c-property-range-error {
+    border: 1px solid var(--error);
+    margin: 0 var(--p2) var(--p);
+    padding: var(--p);
+    border-radius: var(--border-radius);
+    background-color: rgb(from var(--error) r g b / 0.1);
+    font-size: 0.8rem;
+}

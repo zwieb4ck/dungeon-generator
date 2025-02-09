@@ -72,7 +72,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.resizeStage();
       this.context = this.canvas.getContext("2d")!;
       if (this.objectService.nodes.length === 0) {
-        this.createNode(ENodeType.Entry, new Vector2(this.width / 2 - NodeConfig.defaultWidth / 2, this.height / 2 - NodeConfig.defaultHeight / 2));
+        const newNode = this.createNode(ENodeType.Entry, new Vector2(this.width / 2 - NodeConfig.defaultWidth / 2, this.height / 2 - NodeConfig.defaultHeight / 2));
+        this.objectService.updateStartNode(newNode);
       }
       this.ngZone.runOutsideAngular(() => {
         this.renderCanavs();
@@ -208,7 +209,6 @@ export class EditorComponent implements OnInit, OnDestroy {
               const target = clickResult.target as Pin;
               this.clickedOnPin = true;
               if (target.hasConnection) {
-                console.log(target);
               } else {
                 if (this.dragConnectionActive) {
                   const from = this.objectService.draggingConnection?.from;
@@ -427,7 +427,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   //#region Nodes
   createNode(nodeType: ENodeType, position: Vector2 = this.clickPointWorld) {
     this.contextMenuOpen = false;
-    this.objectService.add(NodeFactory.create(nodeType, position));
+    const newNode = NodeFactory.create(nodeType, position)
+    this.objectService.add(newNode);
+    return newNode;
   }
   //#endregion
   //#region Connections

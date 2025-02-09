@@ -3,6 +3,14 @@
 </header>
 <div class="properties">
     <fieldset class="properties-section" *ngIf="selectedNode">
+        <div *ngFor="let property of selectedNode.Properties">
+            <app-boolean *ngIf="property.type === EPropertiesType.Boolean" [property]="property" (update)="handleChange($event)"></app-boolean>
+            <app-button *ngIf="property.type === EPropertiesType.Button" [property]="property" (update)="handleChange($event)"></app-button>
+            <app-number *ngIf="property.type === EPropertiesType.Number" [property]="property" (update)="handleChange($event)"></app-number>
+            <app-range *ngIf="property.type === EPropertiesType.Range" [property]="property" (update)="handleChange($event)"></app-range>
+            <app-string *ngIf="property.type === EPropertiesType.String" [property]="property" (update)="handleChange($event)"></app-string>
+            <app-text *ngIf="property.type === EPropertiesType.Text" [property]="property" (update)="handleChange($event)"></app-text>
+        </div>
         <!--div class="form-group" *ngFor="let property of selectedNode.EditableProperties">
             <label :for="`${selectedNode.id}-${property.key}`"
                 class="form-group__label">{{camelCaseToWordsCapitalized(property.key)}}</label>

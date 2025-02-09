@@ -1,1 +1,22 @@
-<p>range works!</p>
+<div *ngIf="propertyCache && propertyCache.type === EPropertiesType.Range" class="form-group">
+    <span class="form-group__label">{{propertyCache.label}}</span>
+    <div class="form-group__table">
+        <div div class="form-group__col">
+            <label class="form-group__cell" :for="`${id}-0`">Min</label>
+            <div class="form-group__cell">
+                <input type="text" :id="`${id}-0`" class="form-group__input form-group__input--small"
+                    [(ngModel)]="propertyCache.min" (input)="handleInput($event, 'min')" />
+            </div>
+        </div>
+        <div class="form-group__col">
+            <label class="form-group__cell" :for="`${id}-1`">Max</label>
+            <div class="form-group__cell">
+                <input type="text" :id="`${id}-1`" class="form-group__input form-group__input--small"
+                    [(ngModel)]="propertyCache.max" (input)="handleInput($event, 'max')" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="c-property-range-error" *ngIf="isErrorShown">
+    <div>Min has to be smaller than or equal to Max</div>
+</div>
