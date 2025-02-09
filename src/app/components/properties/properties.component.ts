@@ -59,5 +59,4 @@ export class PropertiesComponent {
       this.objectService.updateStartNode(this.selectedNode);
     }
   }
-
 }

@@ -1,6 +1,8 @@
 import { MathUtils, Vector2 } from "three";
 import { ENodeType, Node, TNode } from "./Node";
 import { generateSeed } from "../utils/generateSeed";
+import { PRNG } from "./prng";
+import { EDirection, TDungeonTile } from "../services/generator/generator.service";
 
 export enum EOrientation {
     North,
@@ -68,6 +70,7 @@ export default class Room extends Node {
             { id: 4, type: EPropertiesType.Text, model: this.seed, label: "Seed", propName: "seed" },
             { id: 5, type: EPropertiesType.Button, action: this.applyNewSeed.bind(this), label: "Generate new seed", buttonLabel: "Generate" },
         ];
+        this.regenerateRoom();
     }
 
     private applyNewSeed() {
@@ -101,5 +104,21 @@ export default class Room extends Node {
 
     protected override getProperties() {
         return this.propertyCache.filter(p => p.type !== EPropertiesType.Button);
+    }
+
+    public regenerateRoom(): TDungeonTile {
+        this.random = new PRNG(this.seed);
+        const height = this.random.nextRange(this.minRoomHeight, this.maxRoomHeight + 1);
+        const width = this.random.nextRange(this.minRoomWidth, this.maxRoomWidth + 1);
+        return {
+            type: this.type,
+            w: width,
+            h: height,
+            pos: {
+                x: 0,
+                y: 0,
+            },
+            connections: []
+        };
     }
 }

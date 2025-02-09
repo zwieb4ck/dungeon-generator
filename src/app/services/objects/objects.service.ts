@@ -77,6 +77,7 @@ export class ObjectsService {
     this.selectedElements = this.nodes;
     this.SelectionSubject.next(null);
   }
+
   public delete(objects: Selectable[]) {
     // remove objects
     objects.forEach(o => {
@@ -134,6 +135,22 @@ export class ObjectsService {
   public updateStartNode(newStartRoom: Room) {
     this.nodes.forEach((n)=> n.isStart = false);
     newStartRoom.isStart = true;
+  }
+
+  public getConnectionByPin(pin: Pin) {
+    return this.connections.filter(c => c.from.id === pin.id || c.to?.id === pin.id)[0]
+  }
+
+  public getFirstNode() {
+    return this.nodes.filter(n => n.isStart)[0];
+  }
+
+  public getConnectionsById(id: string) {
+    return this.connections.filter(c => c.from.relatedId === id || c.to?.relatedId === id);
+  }
+
+  public getNodeById(id: string) {
+    return this.nodes.find(n => n.id === id);
   }
 
   private updateConnections() {

@@ -21,22 +21,8 @@
             </div>
         </fieldset>
         <div class="properties-section">
-            <h2 class="title">Input Pins</h2>
-            <ul>
-                <li *ngFor="let pin of inputPins" class="pins">
-                    {{pin.id}}
-                </li>
-            </ul>
-            <h2 class="title">Output Pins</h2>
-            <ul>
-                <li *ngFor="let pin of outputPins" class="pins">
-                    {{pin.id}}
-                </li>
-            </ul>
-        </div>
-        <div class="properties-section">
             <h2 class="title">Preview</h2>
-            <canvas></canvas>
+            <canvas id="room-preview"></canvas>
         </div>
     </div>
 </div>

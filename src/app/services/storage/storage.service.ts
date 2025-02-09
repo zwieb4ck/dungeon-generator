@@ -96,5 +96,6 @@ export class StorageService {
     if (this.currentProject === null) return;
     const seed = generateSeed();
     this.currentProject.seed = seed;
+    this.objectService.emitChanges();
   }
 }
