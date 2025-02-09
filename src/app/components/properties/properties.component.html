@@ -2,20 +2,41 @@
     <span class="title">Properties</span>
 </header>
 <div class="properties">
-    <fieldset class="properties-section" *ngIf="selectedNode">
-        <div *ngFor="let property of selectedNode.Properties">
-            <app-boolean *ngIf="property.type === EPropertiesType.Boolean" [property]="property" (update)="handleChange($event)"></app-boolean>
-            <app-button *ngIf="property.type === EPropertiesType.Button" [property]="property" (update)="handleChange($event)"></app-button>
-            <app-number *ngIf="property.type === EPropertiesType.Number" [property]="property" (update)="handleChange($event)"></app-number>
-            <app-range *ngIf="property.type === EPropertiesType.Range" [property]="property" (update)="handleChange($event)"></app-range>
-            <app-string *ngIf="property.type === EPropertiesType.String" [property]="property" (update)="handleChange($event)"></app-string>
-            <app-text *ngIf="property.type === EPropertiesType.Text" [property]="property" (update)="handleChange($event)"></app-text>
+    <div *ngIf="selectedNode">
+        <fieldset class="properties-section">
+            <h2 class="title">Config</h2>
+            <div *ngFor="let property of selectedNode.Properties">
+                <app-boolean *ngIf="property.type === EPropertiesType.Boolean" [property]="property"
+                    (update)="handleChange($event)"></app-boolean>
+                <app-button *ngIf="property.type === EPropertiesType.Button" [property]="property"
+                    (update)="handleChange($event)"></app-button>
+                <app-number *ngIf="property.type === EPropertiesType.Number" [property]="property"
+                    (update)="handleChange($event)"></app-number>
+                <app-range *ngIf="property.type === EPropertiesType.Range" [property]="property"
+                    (update)="handleChange($event)"></app-range>
+                <app-string *ngIf="property.type === EPropertiesType.String" [property]="property"
+                    (update)="handleChange($event)"></app-string>
+                <app-text *ngIf="property.type === EPropertiesType.Text" [property]="property"
+                    (update)="handleChange($event)"></app-text>
+            </div>
+        </fieldset>
+        <div class="properties-section">
+            <h2 class="title">Input Pins</h2>
+            <ul>
+                <li *ngFor="let pin of inputPins" class="pins">
+                    {{pin.id}}
+                </li>
+            </ul>
+            <h2 class="title">Output Pins</h2>
+            <ul>
+                <li *ngFor="let pin of outputPins" class="pins">
+                    {{pin.id}}
+                </li>
+            </ul>
         </div>
-        <!--div class="form-group" *ngFor="let property of selectedNode.EditableProperties">
-            <label :for="`${selectedNode.id}-${property.key}`"
-                class="form-group__label">{{camelCaseToWordsCapitalized(property.key)}}</label>
-            <input type="text" :id="`${selectedNode.id}-${x.key}`" class="form-group__input" [ngModel]="property.value"
-                (blur)="selectedNode.updateProperty(property, $event)" />
-        </div-->
-    </fieldset>
+        <div class="properties-section">
+            <h2 class="title">Preview</h2>
+            <canvas></canvas>
+        </div>
+    </div>
 </div>

@@ -9,6 +9,7 @@ import { ButtonComponent } from "./button/button.component";
 import { NumberComponent } from './number/number.component';
 import { TextComponent } from './text/text.component';
 import { RangeComponent } from './range/range.component';
+import { EPinType, Pin } from '../../models/Pin';
 
 @Component({
   selector: 'app-properties',
@@ -22,10 +23,20 @@ export class PropertiesComponent {
 
   public EPropertiesType = EPropertiesType;
 
+  public get inputPins(): Pin[] {
+    if (!this.selectedNode) return [];
+    return this.selectedNode.pins.filter(p => p.type === EPinType.In);
+  }
+  
+  public get outputPins(): Pin[] {
+    if (!this.selectedNode) return [];
+    return this.selectedNode.pins.filter(p => p.type === EPinType.Out);
+  }
+
   constructor(public objectService: ObjectsService) {
     this.objectService.SelectionSubject.subscribe(s => {
       if (s === null) {
-        setTimeout(()=> {
+        setTimeout(() => {
           this.selectedNode = s;
         }, 50);
       } else {
@@ -40,10 +51,10 @@ export class PropertiesComponent {
   }
 
   public handleChange(property: TProperty | null) {
-    if(this.selectedNode && property) {
+    if (this.selectedNode && property) {
       this.selectedNode.updateProperty(property);
     }
-    if (!this.selectedNode ||  !property) return;
+    if (!this.selectedNode || !property) return;
     if (property.type === EPropertiesType.Boolean && property.propName === "isStart") {
       this.objectService.updateStartNode(this.selectedNode);
     }

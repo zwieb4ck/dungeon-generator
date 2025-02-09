@@ -1,0 +1,11 @@
+<!--div *ngFor="let notification of notifications; let i = index"
+     class="notification" [style.top.px]="20 + (i * 60)">
+    {{ notification.message }}
+</div-->
+<div *ngFor="let notification of notifications; let i = index" class="notification"
+    [@slideInOut]="notification.isVisible ? 'visible' : 'hidden'" [class]="'notification--' + notification.type"
+    [style.top.px]="20 + (i * 60)">
+    <span class="notification__icon"><app-icon>{{getIcon(notification.type)}}</app-icon></span>
+    <span class="notification__title">{{ notification.message }}</span>
+    <app-icon-button class="notification__closer" (click)="close(notification)">close</app-icon-button>
+</div>

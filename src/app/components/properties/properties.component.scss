@@ -34,8 +34,11 @@
     box-sizing: border-box;
 
     &-section {
-        padding: var(--p2) var(--p);
-        margin: 0 0 var(--p2) 0;
+        padding: var(--p);
         border-bottom: 1px solid var(--background-90);
     }
+}
+
+.pins {
+    background: red;
 }
