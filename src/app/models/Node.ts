@@ -19,6 +19,7 @@ export const NodeConfig = {
         3: "#ef5777",
         4: "#ff3f34",
         5: "#3c40c6",
+        6: "#cccccc",
     },
     backgroundColor: '#1a1b1c',
 }
@@ -30,6 +31,7 @@ export enum ENodeType {
     Elite,
     Teleport,
     Boss,
+    Path,
 }
 export type TNode = {
     position: {

@@ -18,6 +18,7 @@ export default class NodeFactory {
             case ENodeType.Elite: return new EliteNode(position, id, seed);
             case ENodeType.Boss: return new BossNode(position, id, seed);
             case ENodeType.Teleport: return new TeleporterNode(position, id, seed);
+            case ENodeType.Path: return new DefaultNode(position, id, seed);
         }
     }
 
