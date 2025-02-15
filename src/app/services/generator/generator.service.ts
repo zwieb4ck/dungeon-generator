@@ -43,7 +43,7 @@ export class GeneratorService {
 
   constructor(private objectService: ObjectsService, private storageService: StorageService) {
     this.objectService.UpdateSubject.subscribe(() => {
-      this.generateDungeon();
+      // this.generateDungeon();
     });
   }
 

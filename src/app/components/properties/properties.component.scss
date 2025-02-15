@@ -36,9 +36,20 @@
     &-section {
         padding: var(--p);
         border-bottom: 1px solid var(--background-90);
+
+        &--hidden {
+            visibility: hidden;
+        }
     }
 }
 
 .pins {
     background: red;
+}
+
+.room-preview {
+    background: #0a0b0c;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
 }

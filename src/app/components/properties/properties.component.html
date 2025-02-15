@@ -20,9 +20,9 @@
                     (update)="handleChange($event)"></app-text>
             </div>
         </fieldset>
-        <div class="properties-section">
-            <h2 class="title">Preview</h2>
-            <canvas id="room-preview"></canvas>
-        </div>
+    </div>
+    <div class="properties-section"  [ngClass]="{'properties-section--hidden': !selectedNode}" >
+        <h2 class="title">Preview</h2>
+        <canvas id="room-preview" class="room-preview"></canvas>
     </div>
 </div>

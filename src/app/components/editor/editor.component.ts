@@ -272,7 +272,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       case 0:
         if (this.objectService.selectedElements.length > 0 && !this.isMarqueeDrawing && this.clickedOnNode) {
           const distanceVector = new Vector2(event.movementX, event.movementY);
-          this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+          this.objectService.getAllSelectedNodes().forEach(node => {
             node.position.add(distanceVector);
           });
         } else if (!this.clickedOnNode && !this.clickedOnAdd && !this.clickedOnPin && !this.dragConnectionActive) {
@@ -298,6 +298,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.clickedOnNode = false;
     this.clickedOnPin = false;
     this.clickedOnAdd = false;
+    this.objectService.emitChanges();
   }
   //#endregion
   //#region Mouse scroll
@@ -321,7 +322,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.objectService.delete(this.objectService.selectedElements);
         break
       case 'x':
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
           this.objectService.nodes = this.objectService.nodes.filter(n => !this.objectService.selectedElements.includes(n));
           this.objectService.selectedElements = [];
         }
@@ -334,14 +335,14 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
         break;
       case 'c':
-        if (event.ctrlKey) {
-          const nodes = this.objectService.selectedElements.filter(s => s instanceof Node).map(node => node.toJson());
+        if (event.ctrlKey || event.metaKey) {
+          const nodes = this.objectService.getAllSelectedNodes().map(node => node.toJson());
           nodes.forEach(node => node.position = { x: node.position.x + 10, y: node.position.y + 10 })
           navigator.clipboard.writeText(JSON.stringify(nodes));
         }
         break;
       case 'v':
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
           navigator.clipboard.readText().then(text => {
             const nodes = JSON.parse(text) as TNode[];
             if (nodes.length > 0) {
@@ -361,10 +362,10 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
         break;
       case 'd':
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
           event.preventDefault();
           const newNodes: Node[] = [];
-          this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+          this.objectService.getAllSelectedNodes().forEach((node: Node) => {
             const newNode = NodeFactory.create(node.type, new Vector2(node.position.x, node.position.y));
             this.objectService.add(newNode);
             newNodes.push(newNode);
@@ -374,35 +375,35 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
         break;
       case 'ArrowUp':
-        this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        this.objectService.getAllSelectedNodes().forEach(node => {
           node.position.y -= 10;
         });
         break;
       case 'ArrowDown':
-        this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        this.objectService.getAllSelectedNodes().forEach(node => {
           node.position.y += 10;
         });
         break;
       case 'ArrowLeft':
-        this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        this.objectService.getAllSelectedNodes().forEach(node => {
           node.position.x -= 10;
         });
         break;
       case 'ArrowRight':
-        this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        this.objectService.getAllSelectedNodes().forEach(node => {
           node.position.x += 10;
         });
         break;
       case 'q':
-        middle = this.objectService.selectedElements.filter(s => s instanceof Node).reduce((acc, node) => acc.add(node.position), new Vector2(0, 0)).divideScalar(this.objectService.selectedElements.length);
-        this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        middle = this.objectService.getAllSelectedNodes().reduce((acc, node) => acc.add(node.position), new Vector2(0, 0)).divideScalar(this.objectService.selectedElements.length);
+        this.objectService.getAllSelectedNodes().forEach(node => {
           node.position.y = middle.y;
         });
         break;
       case 'a':
-        if (event.ctrlKey) {
-          middle = this.objectService.selectedElements.filter(s => s instanceof Node).reduce((acc, node) => acc.add(node.position), new Vector2(0, 0)).divideScalar(this.objectService.selectedElements.length);
-          this.objectService.selectedElements.filter(s => s instanceof Node).forEach(node => {
+        if (event.ctrlKey || event.metaKey) {
+          middle = this.objectService.getAllSelectedNodes().reduce((acc, node) => acc.add(node.position), new Vector2(0, 0)).divideScalar(this.objectService.selectedElements.length);
+          this.objectService.getAllSelectedNodes().forEach(node => {
             node.position.x = middle.x;
           });
         } else {
@@ -410,7 +411,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
         break;
       case 's':
-        if (event.ctrlKey) {
+        if (event.ctrlKey || event.metaKey) {
           event.preventDefault();
           this.storageService.saveProject();
         }

@@ -153,6 +153,11 @@ export class ObjectsService {
     return this.nodes.find(n => n.id === id);
   }
 
+  public getAllSelectedNodes(): Node[] {
+    const nodes = this.selectedElements.filter(n => n instanceof Node) as Node[];
+    return nodes;
+  }
+
   private updateConnections() {
     this.connections.forEach((c) => {
       const relatedIds = [c.from.relatedId];

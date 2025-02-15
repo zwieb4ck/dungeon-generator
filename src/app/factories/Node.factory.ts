@@ -32,7 +32,7 @@ export default class NodeFactory {
             newNode.pins.push(pin);
         });
         //properties 
-        newNode.assingProperties(json.properties);
+        newNode.assignProperties(json.properties);
         newNode.updateCache();
         return newNode;
     }
