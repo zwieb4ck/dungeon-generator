@@ -93,6 +93,9 @@ export class EditorComponent implements OnInit, OnDestroy {
       });
 
       this.objectService.emitChanges();
+      setTimeout(() => {
+        this.objectService.emitChanges();
+      }, 0);
     }
   }
 

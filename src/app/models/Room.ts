@@ -2,12 +2,6 @@ import { MathUtils, Vector2 } from 'three';
 import { ENodeType, Node, TNode } from './Node';
 import { generateSeed } from '../utils/generateSeed';
 import { PRNG } from './prng';
-import {
-  EDirection,
-  TDungeonTile,
-  TTileConnections,
-} from '../services/generator/generator.service';
-import { ObjectsService } from '../services/objects/objects.service';
 import { Subject } from 'rxjs';
 import { Connection } from './Connection';
 
@@ -31,12 +25,17 @@ export type TRoomConnection = {
   x: number;
   y: number;
   dir: EOrientation;
+  targetId: string | null;
 };
 
 export type TRoom = {
   height: number;
   width: number;
   type: string;
+  pos: {
+    x: number,
+    y: number,
+  }
   connections: TRoomConnection[];
 };
 
@@ -45,27 +44,27 @@ export type TProperty = {
   label: string;
   id: number;
 } & (
-  | {
+    | {
       type: EPropertiesType.Range;
       min: number;
       max: number;
       propName: Record<string, string>;
     }
-  | {
+    | {
       type: EPropertiesType.Button;
       action: () => void;
       buttonLabel: string;
     }
-  | {
+    | {
       type:
-        | EPropertiesType.Boolean
-        | EPropertiesType.String
-        | EPropertiesType.Number
-        | EPropertiesType.Text;
+      | EPropertiesType.Boolean
+      | EPropertiesType.String
+      | EPropertiesType.Number
+      | EPropertiesType.Text;
       model: any;
       propName: string;
     }
-);
+  );
 
 export default class Room extends Node {
   // default properties
@@ -85,6 +84,7 @@ export default class Room extends Node {
   private _room: TRoom | null = null;
 
   public roomUpdater: Subject<TRoom> = new Subject();
+  
   public get Room(): TRoom | null {
     return this._room;
   }
@@ -222,6 +222,10 @@ export default class Room extends Node {
       height: this.roomHeight,
       type: "any",
       connections: this.generateConnections(),
+      pos: {
+        x: 0,
+        y: 0
+      }
     };
     this.roomUpdater.next(this._room);
     return this._room;
@@ -245,10 +249,13 @@ export default class Room extends Node {
         (c) => c !== nextDirection
       );
       const position = this.getConnectionPosition(nextDirection);
+      const between = [c.from.relatedId, c.to!.relatedId];
+      const targetid = between.filter(id => id === this.id)[0];
       connections.push({
         x: position.x,
         y: position.y,
         dir: nextDirection,
+        targetId: targetid,
       });
     });
     return connections;

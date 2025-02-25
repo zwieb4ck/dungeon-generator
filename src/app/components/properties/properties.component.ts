@@ -107,9 +107,9 @@ export class PropertiesComponent implements OnInit, OnDestroy {
       this.objectService.updateStartNode(this.selectedNode);
     }
   }
+  
   private drawRoomPreview(room: TRoom, position: Vector2, maxWidth: number, maxHeight: number): void {
     const { width, height, connections, type } = room;
-console.log("Drawing", room);
     // Definiere Farben
     const colors: Record<number, string> = {
       0: "#37946e", // Grün für Räume
